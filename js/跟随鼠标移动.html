@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #content {
+            width: 810px;
+            height: 291px;
+            position: relative;
+            display: block;
+        }
+
+        #float-box {
+            width: 400px;
+            height: 291px;
+            position: relative;
+        }
+
+        #fdj {
+
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: #ffffcc;
+            opacity: 0.5;
+        }
+
+        #right-box {
+            width: 400px;
+            height: 291px;
+            position: absolute;
+            overflow: hidden;
+            top: 0;
+            left: 405px;
+
+        }
+
+        #right-box>img {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div id="float-box">
+            <img src="./828791_gaitubao_400x291.png" alt="">
+            <div id="fdj"></div>
+        </div>
+        <div id="right-box">
+            <img src="./828791.png" alt="" id="imgd">
+        </div>
+    </div>
+
+    <script>
+        //页面加载完毕执行
+        window.onload = function () {
+
+            //获取需要的元素
+            var content = document.getElementById('content');//外层div
+            var floatb = document.getElementById('float-box');//左边盒子
+            var fdj = document.getElementById('fdj');//放大镜div
+            var rightb = document.getElementById('right-box');
+            var img = document.getElementById('imgd');
+
+            //添加盒子移动事件
+            floatb.onmousemove = function (event) {
+                var event = event || window.event;//兼容ie
+
+                //计算盒子偏移量，让它跟踪鼠标
+                var left = event.clientX - content.offsetLeft - floatb.offsetLeft - fdj.offsetWidth / 2;
+                var top = event.clientY - content.offsetTop - floatb.offsetTop - fdj.offsetHeight / 2;
+
+                //不让放大镜溢出
+                if (left < 0) left = 0;
+                if (top < 0) top = 0;
+                if (left > floatb.offsetWidth - fdj.offsetWidth)
+                    left = floatb.offsetWidth - fdj.offsetWidth;
+                if (top > floatb.offsetHeight - fdj.offsetHeight)
+                    top = floatb.offsetHeight - fdj.offsetHeight;
+
+                //赋给放大镜
+                fdj.style.left = left + "px";
+                fdj.style.top = top + "px";
+
+                var pax = left/(floatb.offsetWidth - fdj.offsetWidth);
+                var pay = top/(floatb.offsetHeight - fdj.offsetHeight);
+
+               img.style.left = -pax*(img.offsetWidth-rightb.offsetWidth)+"px";
+               img.style.top = -pay*(img.offsetHeight-rightb.offsetHeight)+"px";
+            }  
+        }
+    </script>
+</body>
+
+</html>

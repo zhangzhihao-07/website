@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title></title>
+	</head>
+
+	<body>
+		<div id="vid">
+            {{message}}
+            <div>{{school.name}}{{school.talk}}</div>
+            <ul>
+                <li>{{cap[0]}}</li>
+                <li>{{cap[1]}}</li>
+                <li>{{cap[2]}}</li>
+            </ul>
+        </div>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script>
+			var app = new Vue({
+			           el:"#vid",
+			           data:{
+                           message:"这是一条信息",
+                           school:{
+                               name:"jack",
+                               talk:"hello"
+                           },
+                           cap:["1","2","3"]
+			           }
+			       })
+		</script>
+	</body>
+</html>
